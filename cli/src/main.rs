@@ -1,4 +1,5 @@
 use clap::{Parser, Subcommand};
+mod cmd;
 
 #[derive(Parser)]
 #[clap(author, version, about, long_about = None)]
@@ -14,11 +15,11 @@ pub struct Cli {
 
 #[derive(Subcommand, Debug)]
 enum Commands {
-    Setup,
+    Setup(cmd::setup::Args),
 }
 
 fn main() {
-    let args = match Cli::try_parse() {
+    let cli = match Cli::try_parse() {
         Ok(args) => args,
         Err(e) => {
             println!("{}", e);
@@ -27,7 +28,7 @@ fn main() {
     };
 
     // match Commands::exec(cli).awai
-    match args.command {
-        Commands::Setup => println!("you entered setup"),
+    match cli.command {
+        Commands::Setup(args) => cmd::setup::exec(args, cli.json),
     }
 }
