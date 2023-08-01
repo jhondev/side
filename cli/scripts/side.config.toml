@@ -1,0 +1,10 @@
+[platform]
+go = 1.20
+nodejs = 18
+pnpm = 8
+railway = 1
+
+[backend]
+[backend.go]
+
+[backend.go.buf] #buf is installed with pnpm
